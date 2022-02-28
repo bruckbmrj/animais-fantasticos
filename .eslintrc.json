@@ -14,5 +14,6 @@
     "no-param-reassign": 0,
     "import/extensions": 0,
     "no-console": 0
+    // "quotes": 0 (usado para tirar aspas no eslint)
   }
 }
