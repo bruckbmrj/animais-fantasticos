@@ -1,41 +1,39 @@
-export default function initFuncionamento() {
-  const funcionamento = document.querySelector('[data-semana');
-  const diasSemana = funcionamento.dataset.semana.split(',').map(Number);
-  const horarioSemana = funcionamento.dataset.horario.split(',').map(Number);
-
-  // console.log(diasSemana, horarioSemana);
-
-  const dataAgora = new Date();
-  const diaAgora = dataAgora.getDay();
-  const horarioAgora = dataAgora.getHours();
-
-  const semanaAberto = diasSemana.indexOf(diaAgora) !== -1;
-  // console.log(semanaAberto);
-
-  const horarioAberto = (horarioAgora >= horarioSemana[0] && horarioAgora < horarioSemana[1]);
-  console.log(horarioAberto);
-
-  if (semanaAberto && horarioAberto) {
-    funcionamento.classList.add('aberto');
-  }
-  // console.log(diaAgora);
-  // console.log(horarioAgora);
-
-  /* const agora = new Date();
-  const futuro = new Date('Dec 24 2021 23:59');
-
-  console.log(agora.getMonth());
-  console.log(futuro);
-
-  console.log(agora.getTime());
-  console.log(futuro.getTime());
-
-  function transformarDias(tempo) {
-    return tempo / (24 * 60 * 60 * 1000);
+export default class Funcionamento {
+  constructor(funcionamento, activeClass) {
+    this.funcionamento = document.querySelector(funcionamento);
+    this.activeClass = activeClass;
   }
 
-  const diasAgora = transformarDias(agora.getTime());
-  const diasFuturo = transformarDias(futuro.getTime());
+  dadosFuncionamento() {
+    this.diasSemana = this.funcionamento.dataset.semana.split(',').map(Number);
+    this.horarioSemana = this.funcionamento.dataset.horario.split(',').map(Number);
+  }
 
-  console.log(diasFuturo - diasAgora); */
+  dadosAgora() {
+    this.dataAgora = new Date();
+    this.diaAgora = this.dataAgora.getDay();
+    this.horarioAgora = this.dataAgora.getUTCHours() - 3;
+  }
+
+  estaAberto() {
+    const semanaAberto = this.diasSemana.indexOf(this.diaAgora) !== -1;
+    const horarioAberto = (this.horarioAgora >= this.horarioSemana[0]
+      && this.horarioAgora < this.horarioSemana[1]);
+    return semanaAberto && horarioAberto;
+  }
+
+  ativaAberto() {
+    if (this.estaAberto()) {
+      this.funcionamento.classList.add(this.activeClass);
+    }
+  }
+
+  init() {
+    if (this.funcionamento) {
+      this.dadosFuncionamento();
+      this.dadosAgora();
+      this.ativaAberto();
+    }
+    return this;
+  }
 }
