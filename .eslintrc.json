@@ -13,7 +13,11 @@
   "rules": {
     "no-param-reassign": 0,
     "import/extensions": 0,
-    "no-console": 0
+    "no-console": 0,
+    "max-classes-per-file": [
+      "error",
+      { "ignoreExpressions": true, "max": 2 }
+    ]
     // "quotes": 0 (usado para tirar aspas no eslint)
   }
 }
