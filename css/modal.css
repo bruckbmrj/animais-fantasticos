@@ -21,7 +21,9 @@
   border: 10px solid #FB5;
   box-shadow: 0 0 0 10px #fff;
   position: relative;
-  min-width: 300px;
+  width: 80vw;
+  max-width: 600px;
+  box-sizing: border-box;
 }
 
 @keyframes modal {
@@ -48,10 +50,7 @@
   right: -30px;
   position: absolute;
   box-shadow: 0 4px 4px 0 rgba(0,0,0,.3);
-  background: #e54;
-  font-size: 1.2em;
-  color: #fff;
-  font-family: 'IBM Plex Mono', monospace;
+  background: #e54 url('../img/fechar.svg') no-repeat center center;
   cursor: pointer;
 }
 
@@ -66,6 +65,8 @@
   width: 100%;
   padding: .7rem .5rem;
   box-sizing: border-box;
+  border: 2px solid #222;
+  border-radius: 0px;
 }
 
 .modal button[type="submit"] {
